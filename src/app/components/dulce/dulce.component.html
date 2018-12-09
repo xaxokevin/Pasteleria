@@ -1,0 +1,67 @@
+<div *ngIf="dulces?.length > 0; else noDulce">
+  <ul *ngFor="let dulce of dulces" class="list-group">
+    <li class="list-group-item list-group-item-action list-group-item-light">
+      <a class="secondary-content">
+        <i *ngIf="editState == false" (click)="editDulce($event, dulce)" class="fa fa-pencil" aria-hidden="true"></i>
+        <i *ngIf="editState && dulceToEdit.id == dulce.id" (click)="clearState()" class="fa fa-minus-circle" aria-hidden="true"></i>
+      </a>
+      <strong>{{dulce.nombre}}</strong>
+      <blockquote class="blockquote">{{dulce.receta}}</blockquote>
+      <br>
+      <span class="badge badge-light">
+        <strong>Sabor: </strong>{{dulce.sabor}}
+      </span>
+      <span class="badge badge-light">
+        <strong>Ingredientes: </strong>{{dulce.ingredientes}}
+      </span>
+      <span class="badge badge-light">
+        <strong>Precio: </strong>{{dulce.precio}}
+      </span>
+      <hr>
+      <div *ngIf="editState && dulceToEdit.id == dulce.id" class="container-updateDulces">
+
+        <form (ngSubmit)="onUpdateDulce(dulce)"  class="fromAdd">
+          <!-- Material input -->
+          <div class="md-form form-group mt-5">
+            <input mdbInputDirective [(ngModel)]="dulce.nombre" #nombre="ngModel" type="text" class="form-control" name="nombre" id="nombre" placeholder="Tarda de Queso">
+            <label for="formGroupExampleInputMD">Nombre del Dulce</label>
+          </div>
+          <!-- Material input -->
+          <div class="md-form form-group mt-5">
+            <input mdbInputDirective [(ngModel)]="dulce.sabor" #sabor="ngModel" type="text" class="form-control" name="sabor" id="sabor" placeholder="Fresa">
+            <label for="formGroupExampleInput2MD">Sabor</label>
+          </div>
+          <div class="md-form mb-4 pink-textarea active-pink-textarea">
+            <textarea  [(ngModel)]="dulce.ingredientes" #ingredientes="ngModel" type="text" name="ingredientes" id="ingredientes" placeholder="Los ingredientes" class="md-textarea form-control" rows="2"></textarea>
+            <label for="formGroupExampleInput2MD">Ingredientes</label>
+          </div>
+          <div class="md-form mb-4 pink-textarea active-pink-textarea">
+            <textarea  [(ngModel)]="dulce.receta" #receta="ngModel" type="text"  name="receta" id="receta" placeholder="La receta" class="md-textarea form-control" rows="3"></textarea>
+            <label for="formGroupExampleInput2MD">Receta</label>
+          </div>
+          <div class="md-form form-group mt-5">
+            <input mdbInputDirective [(ngModel)]="dulce.precio" #precio="ngModel" type="text" class="form-control" name="precio" id="precio" placeholder="precio por porcion">
+            <label for="formGroupExampleInput2MD">Precio</label>
+          </div>
+          <div class="boton">
+            <button mdbBtn type="submit" color="warning" outline="true" mdbWavesEffect>Editar</button>
+            <button mdbBtn 
+            [swal]="{ title: '¿Quiere eliminar?, esta acción no se puede deshacer', text: '(click fuera del dialogo para cancelar)' }"
+ 
+            (confirm)="deleteDulce($event, dulce)"
+  
+             color="danger" outline="true" mdbWavesEffect>Eliminar</button>
+            
+             
+        </div>
+        </form>
+
+      </div>
+
+    </li>
+  </ul>
+</div>
+<ng-template #noDulce>
+  <hr>
+  <h5>No existen Dulces</h5>
+</ng-template>

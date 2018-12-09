@@ -1,0 +1,38 @@
+<!-- Material form group -->
+
+<div class="addDulce">
+<form (ngSubmit)="onGuardarDulce(formNew)" #formNew="ngForm" class="fromAdd">
+  <!-- Material input -->
+  <div class="md-form form-group mt-5" >
+    <input mdbInputDirective [(ngModel)]="dulce.nombre" #nombre="ngModel" type="text" class="form-control" name="nombre" id="nombre" placeholder="Tarda de Queso" required >
+    <label for="formGroupExampleInputMD">Nombre del Dulce</label>
+    <div *ngIf="nombre.touched && !nombre.valid" ></div>
+  </div>
+  <!-- Material input -->
+  <div class="md-form form-group mt-5">
+    <input mdbInputDirective [(ngModel)]="dulce.sabor" #sabor="ngModel" type="text" class="form-control" name="sabor" id="sabor" placeholder="Fresa" required>
+    <label for="formGroupExampleInput2MD">Sabor</label>
+  </div>
+  <div class="md-form mb-4 pink-textarea active-pink-textarea">
+    <p class="txarea">Ingredientes</p>
+    <textarea [(ngModel)]="dulce.ingredientes"  #ingredientes="ngModel" type="text" name="ingredientes" id="ingredientes" placeholder="Los ingredientes" id="form7" class="md-textarea md-textarea-auto form-control" mdbInputDirective required></textarea>
+  </div>
+
+  <div class="md-form mb-4 pink-textarea active-pink-textarea">
+  <p class="txarea">Receta</p>
+  <textarea [(ngModel)]="dulce.receta"  #receta="ngModel" type="text" name="receta" id="receta" placeholder="La receta" id="form7" class="md-textarea md-textarea-auto form-control" mdbInputDirective required></textarea>
+  </div>
+  <div class="md-form form-group mt-5">
+    <input mdbInputDirective [(ngModel)]="dulce.precio" #precio="ngModel" type="text" class="form-control" name="precio" id="precio" placeholder="precio por porcion" required>
+    <label for="formGroupExampleInput2MD">Precio</label>
+    <div *ngIf="nombre.touched && !nombre.valid" ></div>
+  </div>
+  <div class="boton">
+    <button mdbBtn type="Submit" color="success" outline="true" mdbWavesEffect >Añadir</button>
+</div>
+</form>
+</div>
+<hr>
+<!-- Material form group -->
+<app-dulce></app-dulce>
+
